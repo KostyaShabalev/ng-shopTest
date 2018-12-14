@@ -1,0 +1,36 @@
+<mat-card class="register">
+
+ <mat-card-header>
+   <mat-card-title>Register</mat-card-title>
+ </mat-card-header>
+
+ <mat-card-content>
+   <form class="register__form" [formGroup]="registerForm">
+     <table class="register__table" cellspacing="0">
+       <tr>
+         <td>
+
+           <mat-form-field class="register__form-field">
+             <input class="register__input" matInput placeholder="Login" formControlName="login" name="login" required>
+           </mat-form-field>
+
+         </td>
+       </tr>
+       <tr>
+         <td>
+
+          <mat-form-field class="register__form-field">
+           <input class="register__input" matInput placeholder="Password" formControlName="password" type="password" name="password" required>
+         </mat-form-field>
+
+       </td>
+     </tr>
+   </table>
+ </form>
+</mat-card-content>
+
+<mat-card-actions>
+ <button [disabled]="isInvalid()" mat-raised-button (click)="registerUser()" color="primary">Register</button>
+</mat-card-actions>
+
+</mat-card>

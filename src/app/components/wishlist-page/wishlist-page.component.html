@@ -1,0 +1,20 @@
+<h1>My wishlist</h1>
+<h2 *ngIf="products">Favorite {{ products.length }} of items</h2>
+<mat-grid-list cols="3" rowHeight="250px">
+  <mat-grid-tile *ngFor="let product of products" colspan="1" rowspan="1">
+    <mat-card class="card">
+      <mat-card-header>
+        <mat-card-title>
+          {{ product.title }}
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="card-content">
+        <img [src]="product.thumbnail">
+        <div class="items">Description: {{ product.description }}</div>
+        <div class="items">Price:  {{ product.price }}</div>
+        <div class="items">Stock: {{ product.stock }}</div>
+        <div class="items">Category_title: {{ product.category_title }}</div>
+      </mat-card-content>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>

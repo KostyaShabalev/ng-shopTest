@@ -1,0 +1,19 @@
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+mat-list-item button {
+  padding: 0;
+}
+
+mat-list-item button a {
+  display: block;
+  text-decoration: none;
+  color: #152051;
+  padding: 0 16px;
+}
+
+mat-list-item button a:active {
+  color: #152051;
+}

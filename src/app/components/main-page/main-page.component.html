@@ -1,0 +1,37 @@
+<div>
+  <div class="filters-control header">
+  <form [formGroup]="filtersForm">
+    <mat-form-field>
+      <mat-select placeholder="Choose category" formControlName="category">
+        <mat-option *ngFor="let item of categories$ | async" [value]="item">
+          {{ item }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <input type="number" matInput placeholder="filter by price" formControlName="price">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <input type="number" matInput placeholder="filter by quantity" formControlName="stock">
+    </mat-form-field>
+    <button mat-flat-button (click)="getFilteredProducts()">Get Filtered</button>
+    <button mat-flat-button (click)="onResetFilters()">Clear</button>
+  </form>
+  </div>
+  <div class="flex-container">
+    <mat-card class="product flex-item" *ngFor="let product of products$ | async" routerLink="products/{{product.id}}">
+      <mat-card-header class="product__header">
+        <mat-card-title class="product__title">{{ product.title }}</mat-card-title>
+        <mat-card-subtitle class="product__price">Price: {{ product.price }}</mat-card-subtitle>
+      </mat-card-header>
+      <img class="product__image" src="{{ product.thumbnail }}"
+           alt="Photo of a product {{ product.title }}">
+      <mat-card-content class="product__description">
+        <p>{{ product.description }}</p>
+      </mat-card-content>
+      <mat-card-footer class="product__actions">
+        <button mat-raised-button color="primary" (click)="onAddToCart(product, $event)" class="product__button">Add to Cart</button>
+      </mat-card-footer>
+    </mat-card>
+  </div>
+</div>

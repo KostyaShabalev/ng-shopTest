@@ -1,0 +1,71 @@
+<section>
+  <form [formGroup]="newProductForm" (ngSubmit)="formOnSubmit()">
+    <div class="form-field-container">
+
+      <div class="form-group">
+        <mat-form-field class="form-field">
+          <input matInput [ngClass]="{'is-invalid': submitted && formControls.title.errors}" formControlName="title" type="text"
+                 class="form-control" id="title" placeholder="Product title">
+        </mat-form-field>
+        <div *ngIf="submitted && formControls.title.errors" class="invalid-feedback">
+          <div *ngIf="formControls.title.errors?.required">Product title is required</div>
+          <div *ngIf="formControls.title.errors?.minlength">Min length is 3 char</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <mat-form-field class="form-field">
+          <input matInput [ngClass]="{'is-invalid': submitted && formControls.description.errors}" formControlName="description" type="text"
+                 class="form-control" id="description" placeholder="Description">
+        </mat-form-field>
+        <div *ngIf="submitted && formControls.description.errors" class="invalid-feedback">
+          <div *ngIf="formControls.description.errors?.maxlength">Max length is 255 char</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <mat-form-field class="form-field">
+            <mat-select matInput [ngClass]="{'is-invalid': submitted && formControls.category_title.errors}" formControlName="category_title"
+                        placeholder="Choose category" id="category-title">
+              <mat-option *ngFor="let category of categories" value="category">
+                {{category}}
+              </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <div *ngIf="submitted && formControls.category_title.errors" class="invalid-feedback">
+          <div *ngIf="formControls.category_title.errors?.required">Category is required</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <mat-form-field class="form-field">
+          <input matInput [ngClass]="{'is-invalid': submitted && formControls.price.errors}" formControlName="price" type="number"
+                 class="form-control" id="price" placeholder="Price">
+        </mat-form-field>
+        <div *ngIf="submitted && formControls.price.errors" class="invalid-feedback">
+          <div *ngIf="formControls.price.errors?.required">Price is required</div>
+        </div>
+      </div>
+
+      <div class="fom-group">
+        <mat-form-field class="form-field">
+          <input matInput [ngClass]="{'is-invalid': submitted && formControls.stock.errors}" formControlName="stock" type="number"
+                 class="form-control" id="stock" placeholder="Stock">
+        </mat-form-field>
+        <div *ngIf="submitted && formControls.stock.errors" class="invalid-feedback">
+          <div *ngIf="formControls.stock.errors?.required">Stock is required</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <mat-form-field class="form-field">
+          <input matInput [ngClass]="{'is-invalid': submitted && formControls.thumbnail.errors}" formControlName="thumbnail" type="text"
+                 class="form-control" id="thumbnail" placeholder="Thumbnail">
+        </mat-form-field>
+        <div *ngIf="submitted && formControls.thumbnail.errors" class="invalid-feedback"></div>
+      </div>
+
+    </div>
+    <button mat-raised-button color="primary">Add product</button>
+  </form>
+</section>

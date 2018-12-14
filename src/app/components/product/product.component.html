@@ -1,0 +1,16 @@
+<section>
+
+  <mat-card *ngIf="product" class="example-card">
+    <mat-card-header>
+      <mat-card-title>{{product.title}}</mat-card-title>
+    </mat-card-header>
+    <img mat-card-image src={{product.thumbnail}} alt="Product image">
+    <mat-card-content>
+      <div class="description">{{product.description}}</div>
+      <div>Category title: {{product.category_title}}</div>
+      <div>Price: {{product.price}}</div>
+      <div>Stock: {{product.stock}}</div>
+    </mat-card-content>
+  </mat-card>
+
+</section>

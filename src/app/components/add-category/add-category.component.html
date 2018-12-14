@@ -1,0 +1,30 @@
+<section>
+  <form [formGroup]="newCategoryForm" (ngSubmit)="formOnSubmit()">
+    <div class="form-field-container">
+      <h2>Add new category</h2>
+
+      <div class="form-group">
+        <mat-form-field class="form-field">
+          <input matInput [ngClass]="{'is-invalid': submittedAndTitleErr}" formControlName="title" type="text"
+                 class="form-control" id="title" placeholder="Category title">
+        </mat-form-field>
+        <div *ngIf="submittedAndTitleErr" class="invalid-feedback">
+          <div *ngIf="formControls.title.errors.required">Category title is required</div>
+          <div *ngIf="formControls.title.errors.minlength">Min length is 3 char</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <mat-form-field class="form-field">
+          <input matInput [ngClass]="{'is-invalid': submittedAndDescriptionErr}" formControlName="description" type="text"
+                 class="form-control" id="description" placeholder="Description">
+        </mat-form-field>
+        <div *ngIf="submittedAndDescriptionErr" class="invalid-feedback">
+          <div *ngIf="formControls.description.errors.maxlength">Max length is 255 char</div>
+        </div>
+      </div>
+
+    </div>
+    <button mat-raised-button color="primary">Add category</button>
+  </form>
+</section>

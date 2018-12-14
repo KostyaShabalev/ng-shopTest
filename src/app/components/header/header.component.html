@@ -1,0 +1,41 @@
+<mat-toolbar *ngIf="isAuthorized()" color="primary">
+
+    <mat-toolbar-row>
+      <span>
+          <button mat-button [matMenuTriggerFor]="menu">Menu</button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item>store</button>
+            <button mat-menu-item routerLink="cart">cart</button>
+            <button mat-menu-item>wishlist</button>
+          </mat-menu>
+      </span>
+  
+      <span class="fill-remaining-space"></span>
+  
+      <span>
+        <span class="user-name" mat-button>userName</span>
+        <button mat-button>
+          <a routerLink="/logout" >log out</a>
+        </button>
+      </span>
+    </mat-toolbar-row>
+  
+  </mat-toolbar>
+  
+  <mat-toolbar *ngIf="!isAuthorized()" color="primary">
+  
+      <mat-toolbar-row>
+  
+        <span class="fill-remaining-space"></span>
+    
+        <span>
+          <button mat-button>
+            <a [routerLink]="['', 'login']">login</a>
+          </button>
+          <button mat-button>
+              <a [routerLink]="['', 'register']" >register</a>
+          </button>
+        </span>
+      </mat-toolbar-row>
+      
+    </mat-toolbar>
