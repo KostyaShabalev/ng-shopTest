@@ -5,7 +5,7 @@
           <button mat-button [matMenuTriggerFor]="menu">Menu</button>
           <mat-menu #menu="matMenu">
             <button mat-menu-item>store</button>
-            <button mat-menu-item routerLink="cart">cart</button>
+            <button mat-menu-item [routerLink]="['cart']">cart</button>
             <button mat-menu-item>wishlist</button>
           </mat-menu>
       </span>

@@ -43,10 +43,9 @@ export class CartComponent {
       )
     .subscribe((order: Order) => {
 
-      debugger;
-
       if (!!order && order.items) {
         this.currOrder = order;
+        this.currOrder.total = 0;
 
         for (const key in this.currOrder.items) {
           if (!!key) {
@@ -88,10 +87,8 @@ export class CartComponent {
   deleteProduct(id: string): void {
 
     this.cartService.updateOrder(this.currOrder.items[id], this.currOrder, true)
-    .pipe(
-      map((res: any) => res)
-      )
     .subscribe((response: any) => {
+      debugger;
       this.getCurrentCart();
     });
   }

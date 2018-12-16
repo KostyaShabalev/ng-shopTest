@@ -26,7 +26,11 @@ export class LoginComponent {
     this.authService.login(this.loginForm.value)
     .subscribe(
       (res: any) => {
+        console.log('Succes');
         this.router.navigate(['']);
+      },
+      (err: any) => {
+        alert('User not found');
       });
   }
 

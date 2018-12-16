@@ -18,7 +18,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { AdminPageComponent } from './components';
 import { AdminAddProductComponent } from './components';
 import { AddCategoryComponent } from './components';
-
+import { CartComponent } from './components/cart/cart.component';
 import { NotificationService } from './services/';
 
 @NgModule({
@@ -32,7 +32,8 @@ import { NotificationService } from './services/';
     RegisterComponent,
     AdminPageComponent,
     AdminAddProductComponent,
-    AddCategoryComponent
+    AddCategoryComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,

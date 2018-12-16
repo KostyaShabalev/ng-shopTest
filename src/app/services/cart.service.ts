@@ -4,7 +4,6 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject, of } from 'rxjs';
 import { switchMap, map } from 'rxjs/operators';
 
-import { AuthorizationService } from '../services/authorization.service';
 import { environment } from '../../environments/environment';
 import { User } from '../models/user';
 import { Product } from '../models/product.model';
@@ -17,27 +16,21 @@ export class CartService {
 
   private orderUrl: string = `${environment.api_url}/orders`;
 
-  private allOrders: Array<Order>;
-  private currOrder: Order;
-  private currClient: User;
-  private orderBody: any;
-
   constructor(
-    private http: HttpClient,
-    private authService: AuthorizationService,
+    private http: HttpClient
     ) {  }
 
   getOrders(client: User): Observable<Order> {
+
     return this.http.get<any>(this.orderUrl)
     .pipe(
       map(
         (res: any) => {
-          if (!!res) {
-            this.allOrders = res.orders;
+          if (!!res.orders.length) {
 
-            this.currOrder = this.filterOrders(client, this.allOrders)[0];
+            let currOrder = this.filterOrders(client, res.orders)[0];
 
-            return {...this.currOrder, client };
+            return {...currOrder, client };
           }
 
           return null;
@@ -48,10 +41,7 @@ export class CartService {
   filterOrders(client: User, orders: any): Order {
 
     return orders.filter((order: Order) => {
-
       return ((order.client.id === client.id) && (!order.date));
-      // return true;
-
     });
   }
 
@@ -59,7 +49,7 @@ export class CartService {
     order_item: { quantity: number, product: Product },
     order: Order,
     deleteProduct: boolean
-    ): any {
+    ): Observable<any> {
 
     if (!deleteProduct) {
 
@@ -79,12 +69,9 @@ export class CartService {
 
     }
 
-
-    this.deleteProduct(order, order_item)
-    .subscribe((res: Order | null) => {
-
-      return of(res);
-    });
+    order = this.deleteProduct(order, order_item);
+    return this.http.put(`${this.orderUrl}/${order.id}`, order);
+    
 
   }
 
@@ -110,11 +97,11 @@ export class CartService {
       );
   }
 
-  deleteProduct(order, product): Observable<any> {
+  deleteProduct(order, product): Order {
 
     delete order.items[product.product.id];
 
-    return of(order);
+    return order;
   }
 
   deleteOrder(orderId: string): Observable<any> {

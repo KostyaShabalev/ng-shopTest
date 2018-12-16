@@ -47,11 +47,14 @@ export class MainPageComponent {
       .pipe(
         switchMap((client: User) => {
           this.currClient = client;
+
           return this.cartService.getOrders(client);
         })
         )
       .subscribe((order: Order) => {
-        this.currOrder = order;
+        if (order.id) {
+          this.currOrder = order;
+        }
       });
     }
 
@@ -74,22 +77,17 @@ export class MainPageComponent {
   public onAddToCart(product: Product, evt: any): void {    
     if (evt && product) {
       evt.stopPropagation();
-      
       if (!!this.currOrder) {
         this.cartService.updateOrder({ quantity: 1, product: product }, this.currOrder, false)
-        .subscribe((res: any) => {
-        });
+        .subscribe((res: any) => res);
         
         return;
       }
-
       this.cartService.createOrder(
         this.currClient,
         { quantity: 1, product: product }
         )
-      .subscribe(res => {
-        console.log('order created');
-      });
+      .subscribe((res: any) => res);
     }
   }
 }

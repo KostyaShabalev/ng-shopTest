@@ -13,6 +13,7 @@ export class AppComponent {
   isReady: boolean;
 
   constructor(private authService: AuthorizationService) {
+
     this.authService.isReady().pipe(
       tap((state: boolean) => {
         this.isReady = state;
